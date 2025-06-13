@@ -4,41 +4,49 @@ const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-app.use(cors());
+
+// Serve static files from the public folder
+app.use(express.static('public'));
+
+// Only allow requests from your frontend
+app.use(cors({
+  origin: 'https://surfz-frontend.onrender.com'
+}));
+
 app.use(express.json());
 
 const productData = {
   "AF1 CPFM Fuchsia Dream": {
     price: 57500,
-    image: "https://imgur.com/WLeSvBf.png"
+    image: "cpfm_fuchsia_1.png"
   },
   "AF1 CPFM White": {
     price: 55000,
-    image: "https://imgur.com/eQzhue0.png"
+    image: "cpfm_white_1.png"
   },
   "Jordan 5 Metallic": {
     price: 27500,
-    image: "https://imgur.com/M4sYUqP.png"
+    image: "jordan5_front.png"
   },
   "Balenciaga Runner": {
     price: 80000,
-    image: "https://imgur.com/UoPTHP4.png"
+    image: "balenciaga_runner.png"
   },
   "Rick Owens Porterville": {
     price: 65000,
-    image: "https://imgur.com/J9zQ80U.png"
+    image: "rickowens_1.png"
   },
   "Goyard Bag (green)": {
     price: 375000,
-    image: "https://imgur.com/1738313_z-removebg-preview.png"
+    image: "green-bag.png"
   },
   "Goyard Bag (blue)": {
     price: 350000,
-    image: "https://imgur.com/1666903034971-removebg-preview.png"
+    image: "blue-bag.png"
   },
   "AirPods Max": {
     price: 40000,
-    image: "https://imgur.com/IMG_1013-removebg-preview.png"
+    image: "airpods.png"
   }
 };
 
@@ -46,16 +54,22 @@ app.post('/create-checkout-session', async (req, res) => {
   try {
     const { cart } = req.body;
 
+    if (!Array.isArray(cart) || cart.length === 0) {
+      return res.status(400).json({ error: 'Cart is empty or invalid.' });
+    }
+
     const line_items = cart.map(item => {
       const product = productData[item.name];
-      if (!product) throw new Error(`Unknown product: ${item.name}`);
+      if (!product) {
+        throw new Error(`Unknown product: ${item.name}`);
+      }
 
       return {
         price_data: {
           currency: 'usd',
           product_data: {
             name: item.name,
-            images: [product.image]
+            images: [`https://surfz-backend.onrender.com/${product.image}`]
           },
           unit_amount: product.price,
         },
@@ -73,8 +87,8 @@ app.post('/create-checkout-session', async (req, res) => {
 
     res.json({ url: session.url });
   } catch (error) {
-    console.error('Checkout session error:', error);
-    res.status(500).json({ error: 'Checkout failed.' });
+    console.error('Checkout session error:', error.message);
+    res.status(500).json({ error: error.message || 'Checkout failed.' });
   }
 });
 
