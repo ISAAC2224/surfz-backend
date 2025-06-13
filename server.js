@@ -96,4 +96,6 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-app.listen(4242, () => console.log('Server is running on port 4242'));
+// ✅ FIXED: use environment port so Render works properly
+const PORT = process.env.PORT || 4242;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
