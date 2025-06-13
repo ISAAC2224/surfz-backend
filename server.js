@@ -5,17 +5,29 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
-// ✅ Serve static files from the public folder
+// ✅ Serve static files
 app.use(express.static('public'));
 
-// ✅ Only allow requests from your frontend
+// ✅ Allow both frontend origins
+const allowedOrigins = [
+  'https://surfz-frontend.onrender.com',
+  'https://surfzresell.com'
+];
+
 app.use(cors({
-  origin: 'https://surfz-frontend.onrender.com'
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
+app.options('*', cors());
 app.use(express.json());
 
-// ✅ Product data with public image filenames
+// ✅ Product data
 const productData = {
   "AF1 CPFM Fuchsia Dream": {
     price: 57500,
@@ -51,29 +63,26 @@ const productData = {
   }
 };
 
-// ✅ Checkout endpoint
+// ✅ Checkout route
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { cart } = req.body;
     console.log("Received cart:", cart);
 
     if (!Array.isArray(cart) || cart.length === 0) {
-      console.error("Cart is empty or invalid");
       return res.status(400).json({ error: 'Cart is empty or invalid.' });
     }
 
     const line_items = cart.map(item => {
       const product = productData[item.name];
-      if (!product) {
-        throw new Error(`Unknown product: ${item.name}`);
-      }
+      if (!product) throw new Error(`Unknown product: ${item.name}`);
 
       return {
         price_data: {
           currency: 'usd',
           product_data: {
             name: item.name,
-            images: [`https://surfz-backend.onrender.com/${product.image}`] // 👈 Hosted image URL
+            images: [`https://surfz-backend.onrender.com/${product.image}`]
           },
           unit_amount: product.price,
         },
@@ -97,6 +106,6 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-// ✅ Use Render’s port assignment
+// ✅ Render-compatible port
 const PORT = process.env.PORT || 4242;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
