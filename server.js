@@ -5,16 +5,17 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
-// Serve static files from the public folder
+// ✅ Serve static files from the public folder
 app.use(express.static('public'));
 
-// Only allow requests from your frontend
+// ✅ Only allow requests from your frontend
 app.use(cors({
   origin: 'https://surfz-frontend.onrender.com'
 }));
 
 app.use(express.json());
 
+// ✅ Product data with public image filenames
 const productData = {
   "AF1 CPFM Fuchsia Dream": {
     price: 57500,
@@ -50,10 +51,11 @@ const productData = {
   }
 };
 
+// ✅ Checkout endpoint
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { cart } = req.body;
-    console.log("Received cart:", cart); // ✅ LOG INCOMING CART
+    console.log("Received cart:", cart);
 
     if (!Array.isArray(cart) || cart.length === 0) {
       console.error("Cart is empty or invalid");
@@ -71,7 +73,7 @@ app.post('/create-checkout-session', async (req, res) => {
           currency: 'usd',
           product_data: {
             name: item.name,
-            images: [`https://surfz-backend.onrender.com/${product.image}`]
+            images: [`https://surfz-backend.onrender.com/${product.image}`] // 👈 Hosted image URL
           },
           unit_amount: product.price,
         },
@@ -87,15 +89,14 @@ app.post('/create-checkout-session', async (req, res) => {
       cancel_url: 'https://surfzresell.com/cart.html',
     });
 
-    console.log("Stripe session created:", session.id); // ✅ LOG SUCCESS
-
+    console.log("Stripe session created:", session.id);
     res.json({ url: session.url });
   } catch (error) {
-    console.error('Checkout session error:', error.message); // ✅ LOG ERRORS
+    console.error('Checkout session error:', error.message);
     res.status(500).json({ error: error.message || 'Checkout failed.' });
   }
 });
 
-// ✅ FIXED: use environment port so Render works properly
+// ✅ Use Render’s port assignment
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
