@@ -53,8 +53,10 @@ const productData = {
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { cart } = req.body;
+    console.log("Received cart:", cart); // ✅ LOG INCOMING CART
 
     if (!Array.isArray(cart) || cart.length === 0) {
+      console.error("Cart is empty or invalid");
       return res.status(400).json({ error: 'Cart is empty or invalid.' });
     }
 
@@ -85,9 +87,11 @@ app.post('/create-checkout-session', async (req, res) => {
       cancel_url: 'https://surfzresell.com/cart.html',
     });
 
+    console.log("Stripe session created:", session.id); // ✅ LOG SUCCESS
+
     res.json({ url: session.url });
   } catch (error) {
-    console.error('Checkout session error:', error.message);
+    console.error('Checkout session error:', error.message); // ✅ LOG ERRORS
     res.status(500).json({ error: error.message || 'Checkout failed.' });
   }
 });
