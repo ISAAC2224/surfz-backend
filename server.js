@@ -8,7 +8,7 @@ const app = express();
 // ✅ Serve static files
 app.use(express.static('public'));
 
-// ✅ Allow both frontend origins
+// ✅ Allow both frontend domains dynamically
 const allowedOrigins = [
   'https://surfz-frontend.onrender.com',
   'https://surfzresell.com'
@@ -24,46 +24,21 @@ app.use(cors({
   }
 }));
 
-app.options('*', cors());
 app.use(express.json());
 
-// ✅ Product data
+// ✅ Product Data
 const productData = {
-  "AF1 CPFM Fuchsia Dream": {
-    price: 57500,
-    image: "cpfm_fuchsia_1.png"
-  },
-  "AF1 CPFM White": {
-    price: 55000,
-    image: "cpfm_white_1.png"
-  },
-  "Jordan 5 Metallic": {
-    price: 27500,
-    image: "jordan5_front.png"
-  },
-  "Balenciaga Runner": {
-    price: 80000,
-    image: "balenciaga_runner.png"
-  },
-  "Rick Owens Porterville": {
-    price: 65000,
-    image: "rickowens_1.png"
-  },
-  "Goyard Bag (green)": {
-    price: 375000,
-    image: "green-bag.png"
-  },
-  "Goyard Bag (blue)": {
-    price: 350000,
-    image: "blue-bag.png"
-  },
-  "AirPods Max": {
-    price: 40000,
-    image: "airpods.png"
-  }
+  "AF1 CPFM Fuchsia Dream": { price: 57500, image: "cpfm_fuchsia_1.png" },
+  "AF1 CPFM White":         { price: 55000, image: "cpfm_white_1.png" },
+  "Jordan 5 Metallic":      { price: 27500, image: "jordan5_front.png" },
+  "Balenciaga Runner":      { price: 80000, image: "balenciaga_runner.png" },
+  "Rick Owens Porterville": { price: 65000, image: "rickowens_1.png" },
+  "Goyard Bag (green)":     { price: 375000, image: "green-bag.png" },
+  "Goyard Bag (blue)":      { price: 350000, image: "blue-bag.png" },
+  "AirPods Max":            { price: 40000, image: "airpods.png" }
 };
 
-// ✅ Checkout route
+// ✅ Checkout endpoint
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { cart } = req.body;
@@ -76,7 +51,6 @@ app.post('/create-checkout-session', async (req, res) => {
     const line_items = cart.map(item => {
       const product = productData[item.name];
       if (!product) throw new Error(`Unknown product: ${item.name}`);
-
       return {
         price_data: {
           currency: 'usd',
@@ -101,11 +75,11 @@ app.post('/create-checkout-session', async (req, res) => {
     console.log("Stripe session created:", session.id);
     res.json({ url: session.url });
   } catch (error) {
-    console.error('Checkout session error:', error.message);
+    console.error("Checkout error:", error.message);
     res.status(500).json({ error: error.message || 'Checkout failed.' });
   }
 });
 
-// ✅ Render-compatible port
+// ✅ Set correct port
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
