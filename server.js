@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -35,7 +36,16 @@ const productData = {
   "Rick Owens Porterville": { price: 65000, image: "rickowens_1.png" },
   "Goyard Bag (green)":     { price: 375000, image: "green-bag.png" },
   "Goyard Bag (blue)":      { price: 350000, image: "blue-bag.png" },
-  "AirPods Max":            { price: 40000, image: "airpods.png" }
+  "AirPods Max":            { price: 40000, image: "airpods.png" },
+  "Zoom Kobe 6 Protro 'Dodgers'": { price: 95000, image: "kobe6_dodgers.png" },
+  "Travis Scott x AJ1 Low OG 'Black Phantom'": { price: 85000, image: "travis_blackphantom.png" },
+  "Jordan 14 Retro 'Ferrari'": { price: 60000, image: "jordan14_ferrari.png" },
+  "Union LA x Air Jordan 4 Retro 'Off Noir'": { price: 75000, image: "union4_offnoir.png" },
+  "Lil Yachty x Air Force 1 'Concrete Boys - Lucky Green'": { price: 70000, image: "lilyachty_af1.png" },
+  "Supreme x Dunk Low SB 'Rammellzee'": { price: 55000, image: "rammellzee_sb.png" },
+  "Ben & Jerry’s x Dunk Low SB ‘Chunky Dunky’": { price: 90000, image: "chunky_dunky.png" },
+  "Balenciaga Black Furry Slides": { price: 62000, image: "balenciaga_furry.png" },
+  "Rick Owen’s Vintage Suede Trimmed Leather": { price: 88000, image: "rickvintage_suede.png" }
 };
 
 // ✅ Checkout endpoint
