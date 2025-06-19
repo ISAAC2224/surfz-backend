@@ -5,8 +5,6 @@ const stripe = require("stripe")("sk_test_51RRkFnRwjCfTdExOFcMf6CBRbgndhY5JCzChD
 
 app.use(cors());
 app.use(express.json());
-
-// ✅ Serve images from the 'images' folder publicly
 app.use('/images', express.static('images'));
 
 const productData = {
@@ -51,11 +49,7 @@ app.post("/create-checkout-session", async (req, res) => {
           currency: "usd",
           product_data: {
             name: item.name,
-<<<<<<< HEAD
             images: [`https://surfzresell.com/images/${product.image}`],
-=======
-            images: [`https://surfz-backend.onrender.com/images/${product.image}`], // ✅ Renders from backend
->>>>>>> dd13799 (Add images folder and updated server.js)
           },
           unit_amount: product.price * 100,
         },
