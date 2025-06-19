@@ -17,21 +17,23 @@ const productData = {
   "BAPE ABC Camo Shark Zip Hoodie (Blue)": { price: 27500, image: "Blue1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Pink)": { price: 27500, image: "Pink1.png" },
   "BAPE Multi Camo NYC Shark Zip Hoodie (Black)": { price: 60000, image: "BMCNYC1.png" },
-  "Rick Owen’s Vintage Suede Trimmed Leather": { price: 60000, image: "rickowens_1.png" },
+  "Rick Owen's Vintage Suede Trimmed Leather": { price: 60000, image: "rickowens_1.png" },
   "Balenciaga Black Furry Slides": { price: 55000, image: "balenciaga_runner.png" },
-  "Ben & Jerry’s x Dunk Low SB ‘Chunky Dunky’": { price: 95000, image: "B&J1.png" },
-  "Supreme x Dunk Low SB ‘Rammellzee’": { price: 27500, image: "BBF1.png" },
-  "Lil Yachty x Air Force 1 ‘Concrete Boys - Lucky Green’": { price: 23000, image: "LYXAF1.png" },
-  "Union LA x Air Jordan 4 Retro ‘Off Noir’": { price: 38500, image: "UNION1.png" },
-  "Jordan 14 Retro ‘Ferrari’": { price: 24500, image: "J141.png" },
-  "Travis Scott x AJ1 Low OG ‘Black Phantom’": { price: 58500, image: "TSAJ1.png" },
-  "Zoom Kobe 6 Protro ‘Dodgers’": { price: 28500, image: "ZK61.png" },
+  "Ben & Jerry's x Dunk Low SB 'Chunky Dunky'": { price: 95000, image: "B&J1.png" },
+  "Supreme x Dunk Low SB 'Rammellzee'": { price: 27500, image: "BBF1.png" },
+  "Lil Yachty x Air Force 1 'Concrete Boys - Lucky Green'": { price: 23000, image: "LYXAF1.png" },
+  "Union LA x Air Jordan 4 Retro 'Off Noir'": { price: 38500, image: "UNION1.png" },
+  "Jordan 14 Retro 'Ferrari'": { price: 24500, image: "J141.png" },
+  "Travis Scott x AJ1 Low OG 'Black Phantom'": { price: 58500, image: "TSAJ1.png" },
+  "Zoom Kobe 6 Protro 'Dodgers'": { price: 28500, image: "ZK61.png" },
   "AF1 CPFM White": { price: 55000, image: "cpfm_white_1.png" },
   "AF1 CPFM Fuchsia Dream": { price: 57500, image: "cpfm_fuchsia_1.png" },
   "AirPods Max": { price: 40000, image: "airpods.png" },
   "Goyard Bag (green)": { price: 350000, image: "green-bag.png" },
   "Goyard Bag (blue)": { price: 350000, image: "blue-bag.png" }
 };
+
+const normalize = str => str.toLowerCase().trim().replace(/[‘’“”]/g, "'");
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
@@ -43,13 +45,14 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 
     const line_items = cart.map(item => {
-      const nameFromCart = item.name.toLowerCase().trim();
+      const nameFromCart = normalize(item.name);
       const matchedKey = Object.keys(productData).find(
-        key => key.toLowerCase().trim() === nameFromCart
+        key => normalize(key) === nameFromCart
       );
 
       if (!matchedKey) {
-        console.error("❌ Product not found:", item.name);
+        console.error("❌ No match found for:", nameFromCart);
+        console.log("🔍 Compared against:", Object.keys(productData).map(normalize));
         throw new Error(`Unknown product: ${item.name}`);
       }
 
