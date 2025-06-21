@@ -1,10 +1,13 @@
 const express = require("express");
+const app = express(); // Moved up to fix order
 const cors = require("cors");
-const app = express();
 const stripe = require("stripe")("sk_test_51RRkFnRwjCfTdExOFcMf6CBRbgndhY5JCzChD9PFFBM6TrU1KB8kxHcBrFvwNYk2bOALpzZF12LauRnRDFBJ8wBy00w5sj6qw1");
 
+// MIDDLEWARE
 app.use(cors());
 app.use(express.json());
+
+// ✅ Serve images from the 'images' folder (NOT public/images anymore)
 app.use('/images', express.static('images'));
 
 const productData = {
@@ -25,9 +28,16 @@ const productData = {
   "marni slippers (multiple colors)": { price: 500, image: "pinkmarni.png" },
   "rick owens drkshdw luxor low 'black pearl'": { price: 650, image: "DRKSHDW1.png" },
   "off white slides": { price: 195, image: "OFFW1.png" },
-  "rick owen’s vintage suede trimmed leather": { price: 600, image: "leathersneakers1.png" },
+  "rick owen's vintage suede trimmed leather": { price: 600, image: "leathersneakers1.png" },
   "balenciaga black furry slides": { price: 550, image: "BBFS1.png" },
-  "ben & jerry’s x dunk low sb ‘chunky dunky’": { price: 950, image: "B&J1.png" }
+  "ben & jerry’s x dunk low sb ‘chunky dunky’": { price: 950, image: "B&J1.png" },
+  "bape color camo shark zip hoodie (purple)": { price: 260, image: "Purple1.png" },
+  "bape color camo shark zip hoodie (red)": { price: 300, image: "Red1.png" },
+  "bape abc camo shark zip hoodie (blue)": { price: 275, image: "Blue1.png" },
+  "bape abc camo shark zip hoodie (pink)": { price: 275, image: "Pink1.png" },
+  "bape multi camo nyc shark zip hoodie (black)": { price: 600, image: "BMCNYC1.png" },
+  "chrome hearts made in hollywood ls": { price: 400, image: "CHMIHPCLS1.png" },
+  "chrome hearts spider web long sleeve": { price: 450, image: "CHMBSWLS1.png" }
 };
 
 app.post("/create-checkout-session", async (req, res) => {
@@ -49,7 +59,7 @@ app.post("/create-checkout-session", async (req, res) => {
           currency: "usd",
           product_data: {
             name: item.name,
-            images: [`https://surfzresell.com/images/${product.image}`],
+            images: [`https://surfz-backend.onrender.com/images/${product.image}`],
           },
           unit_amount: product.price * 100,
         },
