@@ -79,12 +79,7 @@ app.post("/create-checkout-session", async (req, res) => {
     console.log("📦 Incoming cart items:", items);
 
     const line_items = items.map(item => {
-      let key;
-      if (item.name.toLowerCase().includes("bag")) {
-        key = `${item.name.trim().toLowerCase()} (color ${item.size.trim().toLowerCase()})`;
-      } else {
-        key = item.size ? `${item.name.trim().toLowerCase()} (size ${item.size.trim().toLowerCase()})` : item.name.trim().toLowerCase();
-      }
+      const key = item.name.trim().toLowerCase();
       const product = productData[key];
 
       if (!product) {
@@ -96,7 +91,7 @@ app.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: item.name,
+            name: key,
             images: [`https://surfz-backend.onrender.com/images/${product.image}`],
           },
           unit_amount: product.price * 100,
