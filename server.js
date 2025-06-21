@@ -11,25 +11,27 @@ app.use(express.json());
 app.use('/images', express.static('images'));
 
 // 🛍️ Product data
-const productData = {
-  // Shoes
+const baseProducts = {
+  // Shoes (base keys, no sizes)
   "af1 cpfm fuchsia dream": { price: 575, image: "cpfm_fuchsia_1.png" },
   "af1 cpfm white": { price: 550, image: "cpfm_white_1.png" },
-  "jordan 5 metallic": { price: 275, image: "jordan5metallic_1.png" },
-  "rick owens porterville": { price: 650, image: "rick_owens_porterville_1.png" },
-  "balenciaga runner": { price: 800, image: "balenciaga_runner_1.png" },
-  "supreme x dunk low sb 'rammellzee'": { price: 275, image: "rammellzee.png" },
-  "jordan 14 retro 'ferrari'": { price: 245, image: "ferrari14.png" },
-  "balenciaga black furry slides": { price: 550, image: "black_furry_slides.png" },
-  "rick owen vintage low brown": { price: 620, image: "vintage_low_brown.png" },
-  "gucci gg slide 'beige canvas'": { price: 300, image: "gg_slide_beige.png" },
-  "rick owens drkshdw luxor low 'black pearl'": { price: 650, image: "drkshdw_blackpearl.png" },
-  "lil yachty x air force 1 low 'concrete boys - lucky green'": { price: 650, image: "lucky_green.png" },
-  "travis scott x air jordan 1 retro low og 'black phantom'": { price: 585, image: "black_phantom.png" },
-  "zoom kobe 6 protro 'dodgers'": { price: 285, image: "kobe_dodgers.png" },
-  "union la x air jordan 4 retro 'off noir'": { price: 385, image: "off_noir.png" },
-  "rick owen's vintage suede trimmed leather": { price: 600, image: "rick_suede_trimmed.png" },
-  "ben & jerry’s x dunk low sb ‘chunky dunky’": { price: 950, image: "chunky_dunky.png" },
+  "jordan 5 metallic": { price: 275, image: "jordan5_front.png" },
+  "rick owens porterville": { price: 650, image: "rickowens_1.png" },
+  "balenciaga runner": { price: 800, image: "balenciaga_runner.png" },
+  "supreme x dunk low sb 'rammellzee'": { price: 275, image: "SXDL1.png" },
+  "jordan 14 retro 'ferrari'": { price: 245, image: "J141.png" },
+  "balenciaga black furry slides": { price: 550, image: "BBFS1.png" },
+  "rick owen vintage low brown": { price: 620, image: "leathersneakers1.png" },
+  "gucci gg slide 'beige canvas'": { price: 300, image: "GGSlides1.png" },
+  "rick owens drkshdw luxor low 'black pearl'": { price: 650, image: "DRKSHDW1.png" },
+  "lil yachty x air force 1 low 'concrete boys - lucky green'": { price: 650, image: "LYXAF1.png" },
+  "travis scott x air jordan 1 retro low og 'black phantom'": { price: 585, image: "TSAJ1.png" },
+  "zoom kobe 6 protro 'dodgers'": { price: 285, image: "ZK61.png" },
+  "union la x air jordan 4 retro 'off noir'": { price: 385, image: "UNION1.png" },
+  "rick owen's vintage suede trimmed leather": { price: 600, image: "leathersneakers1.png" },
+  "ben & jerry’s x dunk low sb ‘chunky dunky’": { price: 950, image: "B&J1.png" },
+  "powerpuff girls blossom nike sb dunks": { price: 300, image: "PGB1.png" },
+  "bottega veneta orbit": { price: 720, image: "BVO1.png" },
 
   // Slides
   "off white slides": { price: 195, image: "off_white_slides.png" },
@@ -49,9 +51,29 @@ const productData = {
   "louis vuitton messenger bag": { price: 700, image: "LVMB1.png" },
 
   // Tech
-  "airpods max": { price: 400, image: "airpods.png" },
+  "airpods max": { price: 400, image: "airpods.png" }
+};
 
-  // Clothing
+const productData = {};
+const sizes = ["5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "11.5", "12", "12.5", "13", "13.5", "14"];
+Object.entries(baseProducts).forEach(([name, data]) => {
+  if (name.includes("hoodie") || name.includes("long sleeve")) {
+    return;
+  }
+  if (name.includes("bag")) {
+    const color = name.split(" ").pop();
+    productData[`${name} (color ${color})`] = data;
+  }
+  if (name.includes("backpack") || name.includes("duffle") || name.includes("slide") || name.includes("sneaker") || name.includes("dunk") || name.includes("jordan") || name.includes("air force") || name.includes("rick") || name.includes("balenciaga") || name.includes("kobe") || name.includes("bottega") || name.includes("gucci") || name.includes("off white") || name.includes("chunky") || name.includes("supreme")) {
+    sizes.forEach(size => {
+      productData[`${name} (size ${size})`] = data;
+    });
+  }
+  productData[name] = data;
+});
+
+// Add clothing (already formatted)
+Object.assign(productData, {
   "chrome hearts made in hollywood ls (size s)": { price: 400, image: "CHMIHPCLS1.png" },
   "chrome hearts made in hollywood ls (size m)": { price: 400, image: "CHMIHPCLS1.png" },
   "chrome hearts made in hollywood ls (size l)": { price: 400, image: "CHMIHPCLS1.png" },
@@ -86,7 +108,7 @@ const productData = {
   "bape color camo shark zip hoodie (purple) (size m)": { price: 260, image: "Purple1.png" },
   "bape color camo shark zip hoodie (purple) (size l)": { price: 260, image: "Purple1.png" },
   "bape color camo shark zip hoodie (purple) (size xl)": { price: 260, image: "Purple1.png" }
-};
+});
 
 // 💳 Stripe Checkout Route
 app.post("/create-checkout-session", async (req, res) => {
@@ -95,7 +117,12 @@ app.post("/create-checkout-session", async (req, res) => {
     console.log("📦 Incoming cart items:", items);
 
     const line_items = items.map(item => {
-      const key = item.size ? `${item.name.trim().toLowerCase()} (size ${item.size.trim().toLowerCase()})` : item.name.trim().toLowerCase();
+      let key;
+      if (item.name.toLowerCase().includes("bag")) {
+        key = `${item.name.trim().toLowerCase()} (color ${item.size.trim().toLowerCase()})`;
+      } else {
+        key = item.size ? `${item.name.trim().toLowerCase()} (size ${item.size.trim().toLowerCase()})` : item.name.trim().toLowerCase();
+      }
       const product = productData[key];
 
       if (!product) {
