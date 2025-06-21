@@ -72,44 +72,6 @@ Object.entries(baseProducts).forEach(([name, data]) => {
   productData[name] = data;
 });
 
-// Add clothing (already formatted)
-Object.assign(productData, {
-  "chrome hearts made in hollywood ls (size s)": { price: 400, image: "CHMIHPCLS1.png" },
-  "chrome hearts made in hollywood ls (size m)": { price: 400, image: "CHMIHPCLS1.png" },
-  "chrome hearts made in hollywood ls (size l)": { price: 400, image: "CHMIHPCLS1.png" },
-  "chrome hearts made in hollywood ls (size xl)": { price: 400, image: "CHMIHPCLS1.png" },
-
-  "chrome hearts spider web long sleeve (size s)": { price: 450, image: "CHMBSWLS1.png" },
-  "chrome hearts spider web long sleeve (size m)": { price: 450, image: "CHMBSWLS1.png" },
-  "chrome hearts spider web long sleeve (size l)": { price: 450, image: "CHMBSWLS1.png" },
-  "chrome hearts spider web long sleeve (size xl)": { price: 450, image: "CHMBSWLS1.png" },
-
-  "bape multi camo nyc shark zip hoodie (black) (size s)": { price: 600, image: "BMCNYC1.png" },
-  "bape multi camo nyc shark zip hoodie (black) (size m)": { price: 600, image: "BMCNYC1.png" },
-  "bape multi camo nyc shark zip hoodie (black) (size l)": { price: 600, image: "BMCNYC1.png" },
-  "bape multi camo nyc shark zip hoodie (black) (size xl)": { price: 600, image: "BMCNYC1.png" },
-
-  "bape abc camo shark zip hoodie (pink) (size s)": { price: 275, image: "Pink1.png" },
-  "bape abc camo shark zip hoodie (pink) (size m)": { price: 275, image: "Pink1.png" },
-  "bape abc camo shark zip hoodie (pink) (size l)": { price: 275, image: "Pink1.png" },
-  "bape abc camo shark zip hoodie (pink) (size xl)": { price: 275, image: "Pink1.png" },
-
-  "bape abc camo shark zip hoodie (blue) (size s)": { price: 275, image: "Blue1.png" },
-  "bape abc camo shark zip hoodie (blue) (size m)": { price: 275, image: "Blue1.png" },
-  "bape abc camo shark zip hoodie (blue) (size l)": { price: 275, image: "Blue1.png" },
-  "bape abc camo shark zip hoodie (blue) (size xl)": { price: 275, image: "Blue1.png" },
-
-  "bape color camo shark zip hoodie (red) (size s)": { price: 300, image: "Red1.png" },
-  "bape color camo shark zip hoodie (red) (size m)": { price: 300, image: "Red1.png" },
-  "bape color camo shark zip hoodie (red) (size l)": { price: 300, image: "Red1.png" },
-  "bape color camo shark zip hoodie (red) (size xl)": { price: 300, image: "Red1.png" },
-
-  "bape color camo shark zip hoodie (purple) (size s)": { price: 260, image: "Purple1.png" },
-  "bape color camo shark zip hoodie (purple) (size m)": { price: 260, image: "Purple1.png" },
-  "bape color camo shark zip hoodie (purple) (size l)": { price: 260, image: "Purple1.png" },
-  "bape color camo shark zip hoodie (purple) (size xl)": { price: 260, image: "Purple1.png" }
-});
-
 // 💳 Stripe Checkout Route
 app.post("/create-checkout-session", async (req, res) => {
   try {
