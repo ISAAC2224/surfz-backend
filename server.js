@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")("sk_test_51RRkFnRwjCfTdExOFcMf6CBRbgndhY5JCzChD9PFFBM6TrU1KB8kxHcBrFvwNYk2bOALpzZF12LauRnRDFBJ8wBy00w5sj6qw1");
@@ -17,11 +16,14 @@ const productData = {
   "Jordan 5 Metallic": { price: 420, image: "jordan5_front.png" },
   "Rick Owens Porterville": { price: 640, image: "rickowens_1.png" },
   "AirPods Max": { price: 400, image: "airpods.png" },
-  "Goyard Duffle Bag Blue": { price: 1100, image: "blue-bag.png" },
-  "Goyard Duffle Bag Green": { price: 1100, image: "green-bag.png" },
-  "Goyard Backpack Burgundy": { price: 1450, image: "GB3.png" },
-  "Goyard Backpack Black": { price: 1450, image: "GB2.png" },
-  "Goyard Backpack Green": { price: 1450, image: "GB1.png" },
+  "Goyard Duffle Bag (Blue)": { price: 1100, image: "blue-bag.png" },
+  "Goyard Duffle Bag (Green)": { price: 1100, image: "green-bag.png" },
+  "Goyard Backpack (Burgundy)": { price: 1450, image: "GB3.png" },
+  "Goyard Backpack (Black)": { price: 1450, image: "GB2.png" },
+  "Goyard Backpack (Green)": { price: 1450, image: "GB1.png" },
+  "Mini Coach Bag (Light Brown)": { price: 120, image: "MC1.png" },
+  "Mini Coach Bag (Black)": { price: 120, image: "MC2.png" },
+  "Mini Coach Bag (Dark Brown)": { price: 120, image: "MC3.png" },
   "Supreme x Dunk Low SB Rammellzee": { price: 275, image: "SXDL1.png" },
   "Jordan 14 Retro Ferrari": { price: 245, image: "J141.png" },
   "Travis Scott x AJ1 Low OG Black Phantom": { price: 585, image: "TSAJ1.png" },
@@ -36,14 +38,11 @@ const productData = {
   "Chrome Hearts Made In Hollywood Plus Cross Long-Sleeve": { price: 340, image: "CHMIHPCLS1.png" },
   "Prada Crochet Tote Bag": { price: 590, image: "PCTB1.png" },
   "Louis Vuitton Messenger Bag": { price: 875, image: "LVMB1.png" },
-  "Mini Coach Bag Light Brown": { price: 120, image: "MC1.png" },
-  "Mini Coach Bag Black": { price: 120, image: "MC2.png" },
-  "Mini Coach Bag Dark Brown": { price: 120, image: "MC3.png" },
-  "BAPE Color Camo Shark Zip Hoodie Purple": { price: 450, image: "Purple1.png" },
-  "BAPE Color Camo Shark Zip Hoodie Red": { price: 450, image: "Red1.png" },
-  "BAPE ABC Camo Shark Zip Hoodie Blue": { price: 450, image: "Blue1.png" },
-  "BAPE ABC Camo Shark Zip Hoodie Pink": { price: 450, image: "Pink1.png" },
-  "BAPE Multi Camo NYC Shark Zip Hoodie Black": { price: 450, image: "BMCNYC1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Purple)": { price: 450, image: "Purple1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Red)": { price: 450, image: "Red1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Blue)": { price: 450, image: "Blue1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Pink)": { price: 450, image: "Pink1.png" },
+  "BAPE Multi Camo NYC Shark Zip Hoodie (Black)": { price: 450, image: "BMCNYC1.png" },
   "Ben & Jerry’s x Dunk Low SB Chunky Dunky (Side)": { price: 695, image: "B&J1.png" },
   "Ben & Jerry’s x Dunk Low SB Chunky Dunky (Sole)": { price: 695, image: "B&J2.png" },
   "Balenciaga Black Furry Slides": { price: 550, image: "BBFS1.png" },
@@ -57,7 +56,7 @@ const productData = {
 app.post("/create-checkout-session", async (req, res) => {
   const items = req.body.items || [];
 
-  console.log("Received cart items:", items);
+  console.log("🛒 Received cart items:", items);
 
   try {
     const lineItems = items.map((item) => {
@@ -86,9 +85,9 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.json({ url: session.url });
   } catch (error) {
-    console.error("Checkout error:", error.message);
+    console.error("❌ Checkout error:", error.message);
     res.status(500).json({ error: error.message });
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
