@@ -57,7 +57,7 @@ const productData = {
 app.post("/create-checkout-session", async (req, res) => {
   const items = req.body.items || [];
 
-  console.log("Received cart items:", items); // ✅ Just log, don't assign
+  console.log("Received cart items:", items);
 
   try {
     const lineItems = items.map((item) => {
@@ -75,6 +75,23 @@ app.post("/create-checkout-session", async (req, res) => {
         quantity: item.quantity || 1,
       };
     });
+
+    // ✅ This line must be inside the async function
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: lineItems,
+      success_url: "https://www.surfzresell.com/success.html",
+      cancel_url: "https://www.surfzresell.com/cancel.html",
+    });
+
+    res.json({ url: session.url });
+  } catch (error) {
+    console.error("Checkout error:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
