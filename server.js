@@ -22,7 +22,7 @@ const productData = {
   "Travis Scott x AJ1 Low OG Black Phantom": { price: 585, image: "TSAJ1.png" },
   "Union LA x Air Jordan 4 Retro Off Noir": { price: 385, image: "UNION1.png" },
   "Zoom Kobe 6 Protro Dodgers": { price: 285, image: "ZK61.png" },
-  "Ben & Jerry’s x Dunk Low SB Chunky Dunky": { price: 695, image: "B&J1.png" },
+  "Ben & Jerry’s x Dunk Low SB 'Chunky Dunky'": { price: 695, image: "B&J1.png" },
   "Supreme x Dunk Low SB Rammellzee": { price: 275, image: "SXDL1.png" },
   "Powerpuff Girls Blossom Nike SB Dunks": { price: 210, image: "PGB1.png" },
   "Chrome Hearts Made In Hollywood Plus Cross Long-Sleeve": { price: 340, image: "CHMIHPCLS1.png" },
