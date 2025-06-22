@@ -55,7 +55,7 @@ const productData = {
 };
 
 app.post("/create-checkout-session", async (req, res) => {
-  const items = req.body.items;
+  const { items } = req.body;
   try {
     const lineItems = items.map((item) => {
       const product = productData[item.name];
@@ -65,7 +65,7 @@ app.post("/create-checkout-session", async (req, res) => {
           currency: "usd",
           product_data: {
             name: item.name,
-            images: [`https://yourdomain.com/images/${product.image}`],
+            images: [`https://surfz-backend.onrender.com/images/${product.image}`],
           },
           unit_amount: product.price * 100,
         },
@@ -77,8 +77,8 @@ app.post("/create-checkout-session", async (req, res) => {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: lineItems,
-      success_url: "https://yourdomain.com/success",
-      cancel_url: "https://yourdomain.com/cancel",
+      success_url: "https://www.surfzresell.com/success.html",
+      cancel_url: "https://www.surfzresell.com/cancel.html",
     });
 
     res.json({ url: session.url });
