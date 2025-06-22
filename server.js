@@ -56,18 +56,25 @@ const productData = {
 app.post("/create-checkout-session", async (req, res) => {
   const items = req.body.items || [];
 
-  console.log("🛒 Received cart items:", items);
+  console.log("📦 Sending cart to backend:");
+  items.forEach(item => console.log("🧾 Item name:", item.name));
 
   try {
     const lineItems = items.map((item) => {
-      const baseName = item.name.replace(/\s?\(([^)]+)\)$/, ""); // remove size in parentheses
-      const product = productData[baseName];
-      if (!product) throw new Error(`Product not found: ${baseName}`);
+      const productKey = Object.keys(productData).find(
+        key => key.toLowerCase() === item.name.toLowerCase()
+      );
+      const product = productData[productKey];
+
+      if (!product) {
+        throw new Error(`Product not found: ${item.name}`);
+      }
+
       return {
         price_data: {
           currency: "usd",
           product_data: {
-            name: item.name, // keep full name with size
+            name: item.name,
             images: [`https://surfz-backend.onrender.com/images/${product.image}`],
           },
           unit_amount: product.price * 100,
