@@ -55,7 +55,10 @@ const productData = {
 };
 
 app.post("/create-checkout-session", async (req, res) => {
-  const { items } = req.body;
+  const items = req.body.items || [];
+
+  console.log("Received cart items:", items); // ✅ Just log, don't assign
+
   try {
     const lineItems = items.map((item) => {
       const product = productData[item.name];
@@ -72,6 +75,22 @@ app.post("/create-checkout-session", async (req, res) => {
         quantity: item.quantity || 1,
       };
     });
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: lineItems,
+      success_url: "https://www.surfzresell.com/success.html",
+      cancel_url: "https://www.surfzresell.com/cancel.html",
+    });
+
+    res.json({ url: session.url });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
