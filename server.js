@@ -27,7 +27,7 @@ const productData = {
   "Supreme x Dunk Low SB Rammellzee": { price: 275, image: "SXDL1.png" },
   "Jordan 14 Retro Ferrari": { price: 245, image: "J141.png" },
   "Travis Scott x AJ1 Low OG Black Phantom": { price: 585, image: "TSAJ1.png" },
-  "Powerpuff Girls Blossom Nike SB Dunks (5.5)": { price: 210, image: "PGB1.png" },
+  "Powerpuff Girls Blossom Nike SB Dunks": { price: 210, image: "PGB1.png" },  // ✅ Fixed
   "Union LA x Air Jordan 4 Retro Off Noir": { price: 385, image: "UNION1.png" },
   "Lil Yachty x Air Force 1 Low Concrete Boys - Lucky Green": { price: 230, image: "LYXAF1.png" },
   "Bottega Veneta Orbit": { price: 800, image: "BVO1.png" },
@@ -43,8 +43,7 @@ const productData = {
   "BAPE ABC Camo Shark Zip Hoodie (Blue)": { price: 450, image: "Blue1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Pink)": { price: 450, image: "Pink1.png" },
   "BAPE Multi Camo NYC Shark Zip Hoodie (Black)": { price: 450, image: "BMCNYC1.png" },
-  "Ben & Jerry’s x Dunk Low SB Chunky Dunky (Side)": { price: 695, image: "B&J1.png" },
-  "Ben & Jerry’s x Dunk Low SB Chunky Dunky (Sole)": { price: 695, image: "B&J2.png" },
+  "Ben & Jerry’s x Dunk Low SB Chunky Dunky": { price: 695, image: "B&J1.png" },  // ✅ Combined to one
   "Balenciaga Black Furry Slides": { price: 550, image: "BBFS1.png" },
   "Rick Owens DRKSHDW Luxor Low Black Pearl": { price: 650, image: "DRKSHDW1.png" },
   "Rick Owens Vintage Suede Trimmed Leather": { price: 600, image: "leathersneakers1.png" },
@@ -52,6 +51,7 @@ const productData = {
   "Zoom Kobe 6 Protro Dodgers": { price: 285, image: "ZK61.png" },
   "Chanel Medium Denim Deauville Tote": { price: 1150, image: "CMDDT1.png" }
 };
+
 
 
 app.post("/create-checkout-session", async (req, res) => {
