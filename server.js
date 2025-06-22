@@ -21,9 +21,9 @@ const productData = {
   "Goyard Backpack (Burgundy)": { price: 1450, image: "GB3.png" },
   "Goyard Backpack (Black)": { price: 1450, image: "GB2.png" },
   "Goyard Backpack (Green)": { price: 1450, image: "GB1.png" },
-  "Mini Coach Bag (Light Brown)": { price: 120, image: "MC1.png" },
-  "Mini Coach Bag (Black)": { price: 120, image: "MC2.png" },
-  "Mini Coach Bag (Dark Brown)": { price: 120, image: "MC3.png" },
+  "Mini Coach Bag (Beige)": { price: 120, image: "MC1.png" },
+  "Mini Coach Bag (Black Gold)": { price: 120, image: "MC2.png" },
+  "Mini Coach Bag (Black Subtle)": { price: 120, image: "MC3.png" },
   "Supreme x Dunk Low SB Rammellzee": { price: 275, image: "SXDL1.png" },
   "Jordan 14 Retro Ferrari": { price: 245, image: "J141.png" },
   "Travis Scott x AJ1 Low OG Black Phantom": { price: 585, image: "TSAJ1.png" },
@@ -52,6 +52,7 @@ const productData = {
   "Zoom Kobe 6 Protro Dodgers": { price: 285, image: "ZK61.png" },
   "Chanel Medium Denim Deauville Tote": { price: 1150, image: "CMDDT1.png" }
 };
+
 
 app.post("/create-checkout-session", async (req, res) => {
   const items = req.body.items || [];
