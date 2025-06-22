@@ -76,7 +76,6 @@ app.post("/create-checkout-session", async (req, res) => {
       };
     });
 
-    // ✅ This line must be inside the async function
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -88,38 +87,6 @@ app.post("/create-checkout-session", async (req, res) => {
     res.json({ url: session.url });
   } catch (error) {
     console.error("Checkout error:", error.message);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: lineItems,
-      success_url: "https://www.surfzresell.com/success.html",
-      cancel_url: "https://www.surfzresell.com/cancel.html",
-    });
-
-    res.json({ url: session.url });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: lineItems,
-      success_url: "https://www.surfzresell.com/success.html",
-      cancel_url: "https://www.surfzresell.com/cancel.html",
-    });
-
-    res.json({ url: session.url });
-  } catch (error) {
-    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
