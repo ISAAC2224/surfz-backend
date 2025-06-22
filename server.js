@@ -55,7 +55,7 @@ const productData = {
 };
 
 app.post("/create-checkout-session", async (req, res) => {
-  const { items } = req.body;
+  const items = req.body.items;
   try {
     const lineItems = items.map((item) => {
       const product = productData[item.name];
