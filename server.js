@@ -15,7 +15,7 @@ const productData = {
   "Goyard Backpack (Black)": { price: 300000, image: "GB2.png" },
   "Goyard Backpack (Green)": { price: 300000, image: "GB1.png" },
   "Rick Owens DRKSHDW Luxor Low Black Pearl": { price: 65000, image: "DRKSHDW1.png" },
-  "Rick Owen's Vintage Suede Trimmed Leather": { price: 60000, image: "leathersneakers1.png" },
+  "Rick Owen's Vintage Suede Trimmed Leather'": { price: 60000, image: "leathersneakers1.png" },
   "Rick Owen Vintage Low Brown": { price: 62000, image: "ROVLB1.png" },
   "Balenciaga Black Furry Slides": { price: 55000, image: "BBFS1.png" },
   "Jordan 14 Retro Ferrari": { price: 24500, image: "J141.png" },
