@@ -8,7 +8,7 @@ app.use(express.json());
 app.use('/images', express.static('images'));
 
 const productData = {
-  "Rick Owen’s Vintage Suede Trimmed Leather": { price: 60000, image: "leathersneakers1.png" },
+  "Rick Owens Vintage suede-trimmed leather sneakers": { price: 60000, image: "leathersneakers1.png" },
   // ⬆️ corrected key
   "Lil Yachty x Air Force 1 'Concrete Boys - Lucky Green'": { price: 23000, image: "LYXAF1.png" },
   "Goyard Duffle Bag (Green)": { price: 350000, image: "green-bag.png" },
