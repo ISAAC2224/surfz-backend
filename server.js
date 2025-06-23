@@ -71,6 +71,7 @@ const productData = {
 "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size M)": { price: 60000, image: "BMCNYC1.png" },
 "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size L)": { price: 60000, image: "BMCNYC1.png" },
 "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size XL)": { price: 60000, image: "BMCNYC1.png" }
+
 };
 
 app.post("/create-checkout-session", async (req, res) => {
