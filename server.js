@@ -9,7 +9,7 @@ app.use('/images', express.static('images'));
 
 const productData = {
   "Rick Owens Vintage suede-trimmed leather sneakers": { price: 60000, image: "leathersneakers1.png" },
-  "Lil Yachty x Air Force 1 'Concrete Boys - Lucky Green'": { price: 23000, image: "LYXAF1.png" },
+  "Lil Yachty x Air Force 1 Concrete Boys Lucky Green": { price: 23000, image: "LYXAF1.png" },
   "Goyard Duffle Bag (Green)": { price: 350000, image: "green-bag.png" },
   "Goyard Duffle Bag (Blue)": { price: 350000, image: "blue-bag.png" },
   "Goyard Backpack (Burgundy)": { price: 300000, image: "GB3.png" },
