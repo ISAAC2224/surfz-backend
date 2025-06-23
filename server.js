@@ -25,15 +25,6 @@ const productData = {
   "Ben & Jerrys x Dunk Low SB Chunky Dunky": { price: 95000, image: "B&J1.png" },
   "Supreme x Dunk Low SB Rammellzee": { price: 27500, image: "SXDL1.png" },
   "Powerpuff Girls Blossom Nike SB Dunks": { price: 21000, image: "PGB1.png" },
-  "Chrome Hearts Made In Hollywood Plus Cross Long-Sleeve": { price: 40000, image: "CHMIHPCLS1.png" },
-  "Chrome Hearts Made In Hollywood LS": { price: 40000, image: "CHMBSWLS1.png" },
-  "Chrome Hearts Spider Web Long Sleeve (Size M)": { price: 45000, image: "CHSWLS1.png" },
-  "Chrome Hearts Spider Web Long Sleeve (Size S)": { price: 45000, image: "CHSWLS1.png" },
-  "BAPE Color Camo Shark Zip Hoodie (Purple)": { price: 26000, image: "Purple1.png" },
-  "BAPE Color Camo Shark Zip Hoodie (Red)": { price: 30000, image: "Red1.png" },
-  "BAPE ABC Camo Shark Zip Hoodie (Blue)": { price: 27500, image: "Blue1.png" },
-  "BAPE ABC Camo Shark Zip Hoodie (Pink)": { price: 27500, image: "Pink1.png" },
-  "BAPE Multi Camo NYC Shark Zip Hoodie (Black)": { price: 60000, image: "BMCNYC1.png" },
   "Balenciaga Runner": { price: 80000, image: "balenciaga_runner.png" },
   "AF1 CPFM Fuchsia Dream": { price: 57500, image: "cpfm_fuchsia_1.png" },
   "AF1 CPFM White": { price: 55000, image: "cpfm_white_1.png" },
@@ -52,6 +43,41 @@ const productData = {
   "Bottega Veneta Orbit": { price: 95000, image: "BVO1.png" },
   "Rick Owens Vintage Low Brown": { price: 59000, image: "ROVLB1.png" },
   "Marni Slippers (Multiple Colors)": { price: 50000, image: "pinkmarni.png" }
+    "Chrome Hearts Spider Web Long Sleeve (Size M)": { price: 45000, image: "CHSWLS1.png" },
+  "Chrome Hearts Spider Web Long Sleeve (Size S)": { price: 45000, image: "CHSWLS1.png" },
+  "Chrome Hearts Spider Web Long Sleeve (Size L)": { price: 45000, image: "CHSWLS1.png" },
+  "Chrome Hearts Spider Web Long Sleeve (Size XL)": { price: 45000, image: "CHSWLS1.png" },
+  
+  "Chrome Hearts Made In Hollywood LS (Size S)": { price: 40000, image: "CHMBSWLS1.png" },
+  "Chrome Hearts Made In Hollywood LS (Size M)": { price: 40000, image: "CHMBSWLS1.png" },
+  "Chrome Hearts Made In Hollywood LS (Size L)": { price: 40000, image: "CHMBSWLS1.png" },
+  "Chrome Hearts Made In Hollywood LS (Size XL)": { price: 40000, image: "CHMBSWLS1.png" },
+
+  "BAPE Color Camo Shark Zip Hoodie (Purple) (Size S)": { price: 26000, image: "Purple1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Purple) (Size M)": { price: 26000, image: "Purple1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Purple) (Size L)": { price: 26000, image: "Purple1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Purple) (Size XL)": { price: 26000, image: "Purple1.png" },
+
+  "BAPE Color Camo Shark Zip Hoodie (Red) (Size S)": { price: 30000, image: "Red1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Red) (Size M)": { price: 30000, image: "Red1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Red) (Size L)": { price: 30000, image: "Red1.png" },
+  "BAPE Color Camo Shark Zip Hoodie (Red) (Size XL)": { price: 30000, image: "Red1.png" },
+
+  "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size S)": { price: 27500, image: "Blue1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size M)": { price: 27500, image: "Blue1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size L)": { price: 27500, image: "Blue1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size XL)": { price: 27500, image: "Blue1.png" },
+
+  "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size S)": { price: 27500, image: "Pink1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size M)": { price: 27500, image: "Pink1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size L)": { price: 27500, image: "Pink1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size XL)": { price: 27500, image: "Pink1.png" },
+
+  "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size S)": { price: 60000, image: "BMCNYC1.png" },
+  "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size M)": { price: 60000, image: "BMCNYC1.png" },
+  "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size L)": { price: 60000, image: "BMCNYC1.png" },
+  "BAPE Multi Camo NYC Shark Zip Hoodie (Black) (Size XL)": { price: 60000, image: "BMCNYC1.png" },
+
 };
 
 app.post("/create-checkout-session", async (req, res) => {
