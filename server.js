@@ -21,7 +21,7 @@ const productData = {
   "Jordan 14 Retro Ferrari": { price: 24500, image: "J141.png" },
   "Travis Scott x AJ1 Low OG Black Phantom": { price: 58500, image: "TSAJ1.png" },
   "Union LA x Air Jordan 4 Retro Off Noir": { price: 38500, image: "UNION1.png" },
-  "Zoom Kobe 6 Protro Dodgers": { price: 28500, image: "ZK61.png" },
+  "Zoom Kobe 6 Protro 'Dodgers'": { price: 28500, image: "ZK61.png" },
   "Ben & Jerry’s x Dunk Low SB Chunky Dunky": { price: 95000, image: "B&J1.png" },
   "Supreme x Dunk Low SB Rammellzee": { price: 27500, image: "SXDL1.png" },
   "Powerpuff Girls Blossom Nike SB Dunks": { price: 21000, image: "PGB1.png" },
