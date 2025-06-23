@@ -9,7 +9,6 @@ app.use('/images', express.static('images'));
 
 const productData = {
   "Rick Owens Vintage suede-trimmed leather sneakers": { price: 60000, image: "leathersneakers1.png" },
-  // ⬆️ corrected key
   "Lil Yachty x Air Force 1 'Concrete Boys - Lucky Green'": { price: 23000, image: "LYXAF1.png" },
   "Goyard Duffle Bag (Green)": { price: 350000, image: "green-bag.png" },
   "Goyard Duffle Bag (Blue)": { price: 350000, image: "blue-bag.png" },
@@ -50,14 +49,16 @@ const productData = {
   "Louis Vuitton My Monogram Eclipse Hat": { price: 24500, image: "LVEH1.png" },
   "Off White Slides": { price: 26000, image: "OFFW1.png" },
   "Gucci GG Slide Beige Canvas": { price: 30000, image: "GGSlides1.png" },
-  "Bottega Veneta Orbit": { price: 95000, image: "BVO1.png" }
+  "Bottega Veneta Orbit": { price: 95000, image: "BVO1.png" },
+  "Rick Owens Vintage Low Brown": { price: 59000, image: "ROVLB1.png" },
+  "Marni Slippers (Multiple Colors)": { price: 50000, image: "pinkmarni.png" }
 };
 
 app.post("/create-checkout-session", async (req, res) => {
   const { items } = req.body;
   try {
     const lineItems = items.map(item => {
-      const safeName = item.name.replace(/[‘’]/g, "'").split(' (')[0].trim(); // ← cleans apostrophes + variants
+      const safeName = item.name.replace(/[‘’]/g, "'").split(' (')[0].trim();
       const product = productData[item.name] || productData[safeName];
       if (!product) throw new Error(`Product not found: ${item.name}`);
       return {
