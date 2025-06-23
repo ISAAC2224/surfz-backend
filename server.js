@@ -56,7 +56,7 @@ app.post("/create-checkout-session", async (req, res) => {
   const { items } = req.body;
   try {
     const lineItems = items.map(item => {
-      const cleanName = item.name.split(' (')[0].trim();
+      const cleanName = item.name.replace(/[‘’“”']/g, "'").split(" (")[0].trim();
       const product = productData[item.name] || productData[cleanName];
       if (!product) throw new Error(`Product not found: ${item.name}`);
       return {
@@ -82,9 +82,9 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.json({ url: session.url });
   } catch (err) {
-    console.error("Stripe session not started:", err);
+    console.error("❌ Stripe session not started:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.listen(3000, () => console.log("🚀 Server running on port 3000"));
