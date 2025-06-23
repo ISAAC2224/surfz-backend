@@ -3,7 +3,9 @@ const app = express();
 const cors = require("cors");
 const stripe = require("stripe")("sk_test_51RRkFnRwjCfTdExOFcMf6CBRbgndhY5JCzChD9PFFBM6TrU1KB8kxHcBrFvwNYk2bOALpzZF12LauRnRDFBJ8wBy00w5sj6qw1");
 
-app.use(cors());
+app.use(cors({
+  origin: "https://surfzresell.com"
+}));
 app.use(express.json());
 app.use('/images', express.static('images'));
 
