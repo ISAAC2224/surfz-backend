@@ -63,7 +63,7 @@ const productData = {
   "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size M)": { price: 27500, image: "Blue1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size L)": { price: 27500, image: "Blue1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Blue) (Size XL)": { price: 27500, image: "Blue1.png" },
-  "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size:S)": { price: 27500, image: "Pink1.png" },
+  "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size: S)": { price: 27500, image: "Pink1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size M)": { price: 27500, image: "Pink1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size L)": { price: 27500, image: "Pink1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Pink) (Size XL)": { price: 27500, image: "Pink1.png" },
