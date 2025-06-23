@@ -3,13 +3,13 @@ const app = express();
 const cors = require("cors");
 const stripe = require("stripe")("sk_test_51RRkFnRwjCfTdExOFcMf6CBRbgndhY5JCzChD9PFFBM6TrU1KB8kxHcBrFvwNYk2bOALpzZF12LauRnRDFBJ8wBy00w5sj6qw1");
 
-app.use(cors({
-  origin: "https://surfzresell.com"
-}));
+app.use(cors());
 app.use(express.json());
 app.use('/images', express.static('images'));
 
 const productData = {
+  "Rick Owen’s Vintage Suede Trimmed Leather": { price: 60000, image: "leathersneakers1.png" },
+  // ⬆️ corrected key
   "Lil Yachty x Air Force 1 'Concrete Boys - Lucky Green'": { price: 23000, image: "LYXAF1.png" },
   "Goyard Duffle Bag (Green)": { price: 350000, image: "green-bag.png" },
   "Goyard Duffle Bag (Blue)": { price: 350000, image: "blue-bag.png" },
@@ -17,7 +17,6 @@ const productData = {
   "Goyard Backpack (Black)": { price: 300000, image: "GB2.png" },
   "Goyard Backpack (Green)": { price: 300000, image: "GB1.png" },
   "Rick Owens DRKSHDW Luxor Low Black Pearl": { price: 65000, image: "DRKSHDW1.png" },
-  "Rick Owen's Vintage Suede Trimmed Leather'": { price: 60000, image: "leathersneakers1.png" },
   "Rick Owen Vintage Low Brown": { price: 62000, image: "ROVLB1.png" },
   "Balenciaga Black Furry Slides": { price: 55000, image: "BBFS1.png" },
   "Jordan 14 Retro Ferrari": { price: 24500, image: "J141.png" },
@@ -58,8 +57,8 @@ app.post("/create-checkout-session", async (req, res) => {
   const { items } = req.body;
   try {
     const lineItems = items.map(item => {
-      const cleanName = item.name.replace(/[‘’“”']/g, "'").split(" (")[0].trim();
-      const product = productData[item.name] || productData[cleanName];
+      const safeName = item.name.replace(/[‘’]/g, "'").split(' (')[0].trim(); // ← cleans apostrophes + variants
+      const product = productData[item.name] || productData[safeName];
       if (!product) throw new Error(`Product not found: ${item.name}`);
       return {
         price_data: {
@@ -84,9 +83,9 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.json({ url: session.url });
   } catch (err) {
-    console.error("❌ Stripe session not started:", err.message);
+    console.error("Stripe session not started:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(3000, () => console.log("🚀 Server running on port 3000"));
+app.listen(3000, () => console.log("✅ Server running on port 3000"));
