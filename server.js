@@ -72,7 +72,7 @@ app.post("/create-checkout-session", async (req, res) => {
           key: "shoe_size",
           label: {
             type: "custom",
-            custom: "Shoe Size"
+            custom: "Type Size"
           },
           type: "text",
           optional: false
