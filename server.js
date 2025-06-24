@@ -34,7 +34,15 @@ const productData = {
   "BAPE Color Camo Shark Zip Hoodie (Red)": { price: 30000, image: "Red1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Blue)": { price: 27500, image: "Blue1.png" },
   "BAPE ABC Camo Shark Zip Hoodie (Pink)": { price: 27500, image: "Pink1.png" },
-  "BAPE Multi Camo NYC Shark Zip Hoodie (Black)": { price: 60000, image: "BMCNYC1.png" }
+  "BAPE Multi Camo NYC Shark Zip Hoodie (Black)": { price: 60000, image: "BMCNYC1.png" },
+
+  // Bags
+  "Chanel Medium Denim Deauville Tote": { price: 240000, image: "CMDDT1.png" },
+  "Prada Crochet Tote Bag": { price: 160000, image: "PCTB1.png" },
+  "Louis Vuitton Messenger Bag": { price: 70000, image: "LVMB1.png" },
+  "Mini Coach Bag": { price: 12500, image: "MCB1.png" },
+  "Goyard Backpack": { price: 300000, image: "GB1.png" },
+  "Goyard Duffle Bag": { price: 350000, image: "blue-bag.png" }
 };
 
 app.post("/create-checkout-session", async (req, res) => {
@@ -75,7 +83,7 @@ app.post("/create-checkout-session", async (req, res) => {
           key: "shoe_size",
           label: {
             type: "custom",
-            custom: "Type Size"
+            custom: "Type Size or Color"
           },
           type: "text",
           optional: false
