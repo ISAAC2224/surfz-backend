@@ -47,9 +47,7 @@ app.post("/create-checkout-session", async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.name,
-          images: [`https://www.surfzresell.com/images/${product.image}`]
-
-          ]
+          images: [`https://surfz-backend.onrender.com/images/${product.image}`]
         },
         unit_amount: product.price,
       },
