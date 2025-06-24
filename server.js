@@ -28,7 +28,7 @@ const productData = {
   "Balenciaga Runner": { price: 80000, image: "balenciaga_runner.png" },
   "AF1 CPFM Fuchsia Dream": { price: 57500, image: "cpfm_fuchsia_1.png" },
   "AF1 CPFM White": { price: 55000, image: "cpfm_white_1.png" },
-  "Jordan 5 Metallic": { price: 42000, image: "jordan5_front.png" },
+  "Jordan 5 Metallic": { price: 27500, image: "jordan5_front.png" },
   "Rick Owens Porterville": { price: 64000, image: "rickowens_1.png" },
   "AirPods Max": { price: 40000, image: "airpods.png" },
   "Mini Coach Bag (Beige)": { price: 12500, image: "MC1.png" },
