@@ -64,6 +64,20 @@ app.post("/create-checkout-session", async (req, res) => {
       mode: "payment",
       success_url: "https://www.surfzresell.com/success",
       cancel_url: "https://www.surfzresell.com/cancel",
+      shipping_address_collection: {
+        allowed_countries: ["US"]
+      },
+      custom_fields: [
+        {
+          key: "shoe_size",
+          label: {
+            type: "custom",
+            custom: "Shoe Size"
+          },
+          type: "text",
+          optional: false
+        }
+      ]
     });
 
     res.json({ url: session.url });
