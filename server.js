@@ -47,8 +47,8 @@ app.post("/create-checkout-session", async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.name,
-          images: [
-            `https://surfzresell.com/images/${product.image}`
+          images: [`https://www.surfzresell.com/images/${product.image}`]
+
           ]
         },
         unit_amount: product.price,
@@ -72,7 +72,7 @@ app.post("/create-checkout-session", async (req, res) => {
           key: "shoe_size",
           label: {
             type: "custom",
-            custom: "Type Size"
+            custom: "Shoe Size"
           },
           type: "text",
           optional: false
