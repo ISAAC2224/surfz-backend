@@ -42,7 +42,11 @@ const productData = {
   "Louis Vuitton Messenger Bag": { price: 70000, image: "LVMB1.png" },
   "Mini Coach Bag": { price: 12500, image: "MCB1.png" },
   "Goyard Backpack": { price: 300000, image: "GB1.png" },
-  "Goyard Duffle Bag": { price: 350000, image: "blue-bag.png" }
+  "Goyard Duffle Bag": { price: 350000, image: "blue-bag.png" },
+
+  // Accessories & Headphones
+  "Louis Vuitton My Monogram Eclipse Hat": { price: 24500, image: "LVEH1.png" },
+  "AirPods Max": { price: 40000, image: "airpods.png" }
 };
 
 app.post("/create-checkout-session", async (req, res) => {
@@ -80,7 +84,7 @@ app.post("/create-checkout-session", async (req, res) => {
       },
       custom_fields: [
         {
-          key: "shoe_size",
+          key: "product_option",
           label: {
             type: "custom",
             custom: "Type Size or Color"
