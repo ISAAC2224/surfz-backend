@@ -40,22 +40,27 @@ const productData = {
 app.post("/create-checkout-session", async (req, res) => {
   const { items } = req.body;
 
-  const lineItems = items.map((item) => {
-    const product = productData[item.name];
-    return {
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: item.name,
-          images: [`https://surfz-backend.onrender.com/images/${product.image}`]
-        },
-        unit_amount: product.price,
-      },
-      quantity: 1,
-    };
-  });
-
   try {
+    const lineItems = items.map((item) => {
+      const product = productData[item.name];
+
+      if (!product) {
+        throw new Error(`Product not found: ${item.name}`);
+      }
+
+      return {
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: item.name,
+            images: [`https://surfz-backend.onrender.com/images/${product.image}`],
+          },
+          unit_amount: product.price,
+        },
+        quantity: 1,
+      };
+    });
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
@@ -78,8 +83,9 @@ app.post("/create-checkout-session", async (req, res) => {
       ]
     });
 
-    res.json({ url: session.url });
+    res.status(200).json({ url: session.url });
   } catch (error) {
+    console.error("Checkout error:", error);
     res.status(500).json({ error: error.message });
   }
 });
